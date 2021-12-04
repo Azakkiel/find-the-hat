@@ -9,16 +9,13 @@ class Field {
   constructor(twoDimArray){
     this._field = twoDimArray;
 }
-get field() {
-    return this_field;
-}
-set field(twoDimArray){
-    this._field = twoDimArray;
-}
 print () {
-    console.log(this._field.join())
+    for (let i = 0; i <this._field.length;i++){
+        console.log(this._field[i].join());
+    }
 }
 }
+
 const kkt = new Field([
     ['*', '░', 'O'],
     ['░', 'O', '░'],
