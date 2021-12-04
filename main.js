@@ -8,10 +8,10 @@ const pathCharacter = '*';
 class Field {
   constructor(twoDimArray){
     this._field = twoDimArray;
-    this._posX = 6;
-    this._posY = 1;
-    this._hatPos = [[0],[0]];
-    this.holePos = [[0],[0]];
+    this._posX = 0;
+    this._posY = 0;
+    this._hatPos = [[1],[2]];
+    this.holePos = [[2],[0]];
 }
 print () {
     for (let i = 0; i <this._field.length;i++){
@@ -21,14 +21,31 @@ print () {
 //takes in direction from user and moves him
 promptInput() {
     const input = prompt('Enter a direction: N, W, E, S: ');
+    console.log(input)
     if (input == 'N'){
         this._posY --;
+        this.positionCheck();
+        this.addPathChar();
+        this.print();
+        this.promptInput();
     } else if (input == 'S'){
         this._posY ++;
+        this.positionCheck();
+        this.addPathChar();
+        this.print();
+        this.promptInput();
     } else if (input == 'W'){
         this._posX --;
+        this.positionCheck();
+        this.addPathChar();
+        this.print();
+        this.promptInput();
     } else if (input== 'E'){
-        this._posY ++;
+        this._posX ++;
+        this.positionCheck();
+        this.addPathChar();
+        this.print();
+        this.promptInput();
     } else {
         console.log('wrong input, try again')
         this.promptInput();
@@ -40,16 +57,18 @@ positionCheck() {
     console.log(currentPos.toString())
         if (currentPos[0].toString() == this._hatPos[0].toString() && currentPos[1].toString() == this._hatPos[1].toString()){
         console.log('Got the hat, you win.');
-        return;
+        return true;
     } else if (currentPos[0].toString() === this.holePos[0].toString() && currentPos[1].toString() === this.holePos[1].toString() ){
         console.log('Fell into a hole, you lose.');
-        return;
-    } else if (currentPos[1].toString() > this._field.length || currentPos[0].toString() > this._field[0].length){
+        return false;
+    } else if (currentPos[1].toString() > this._field.length-1 || currentPos[0].toString() > this._field[0].length-1){
         console.log('Out ouf bounds, you lose.');
-        return;
+        return false;
     }
 }
-
+addPathChar() {
+    this._field[this._posY][this._posX] = pathCharacter;
+}
 
 }
 
@@ -58,4 +77,4 @@ const kkt = new Field([
     ['░', 'O', '░'],
     ['░', '^', '░'],
   ]);
-  kkt.positionCheck();
+  kkt.promptInput();
