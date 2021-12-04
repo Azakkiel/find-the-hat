@@ -32,6 +32,18 @@ promptInput() {
         this.promptInput();
 }
 }
+positionCheck() {
+    let currentPos =[[this._posX],[this._posY]];
+    if (currentPos === this.hatPos){
+        console.log('Got the hat, you win.');
+        return;
+    } else if (currentPos === this.holePos){
+        console.log('Fell into a hole, you lose.');
+        return;
+    } else if (currentPos[1] > this._field.length || currentPos[0] > this._field[0].length){
+        console.log('Out ouf bounds, you lose.')
+    }
+}
 
 
 }
@@ -41,4 +53,4 @@ const kkt = new Field([
     ['░', 'O', '░'],
     ['░', '^', '░'],
   ]);
-  kkt.promptInput();
+  kkt.positionCheck();
