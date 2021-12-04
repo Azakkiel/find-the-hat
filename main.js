@@ -8,8 +8,10 @@ const pathCharacter = '*';
 class Field {
   constructor(twoDimArray){
     this._field = twoDimArray;
-    this._posX = 0;
-    this._posY = 0;
+    this._posX = 6;
+    this._posY = 1;
+    this._hatPos = [[0],[0]];
+    this.holePos = [[0],[0]];
 }
 print () {
     for (let i = 0; i <this._field.length;i++){
@@ -32,16 +34,19 @@ promptInput() {
         this.promptInput();
 }
 }
+//checks if player is on hat, hole or out of bounds and ends the game if any of those are true
 positionCheck() {
-    let currentPos =[[this._posX],[this._posY]];
-    if (currentPos === this.hatPos){
+    let currentPos =[[this._posX],[this._posY]]
+    console.log(currentPos.toString())
+        if (currentPos[0].toString() == this._hatPos[0].toString() && currentPos[1].toString() == this._hatPos[1].toString()){
         console.log('Got the hat, you win.');
         return;
-    } else if (currentPos === this.holePos){
+    } else if (currentPos[0].toString() === this.holePos[0].toString() && currentPos[1].toString() === this.holePos[1].toString() ){
         console.log('Fell into a hole, you lose.');
         return;
-    } else if (currentPos[1] > this._field.length || currentPos[0] > this._field[0].length){
-        console.log('Out ouf bounds, you lose.')
+    } else if (currentPos[1].toString() > this._field.length || currentPos[0].toString() > this._field[0].length){
+        console.log('Out ouf bounds, you lose.');
+        return;
     }
 }
 
